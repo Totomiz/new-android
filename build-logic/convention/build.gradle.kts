@@ -103,5 +103,9 @@ gradlePlugin {
             id = "newandroid.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+        register("demoApp") {
+            id = "newandroid.demo.app"
+            implementationClass = "DemoAppPlugin"
+        }
     }
 }
