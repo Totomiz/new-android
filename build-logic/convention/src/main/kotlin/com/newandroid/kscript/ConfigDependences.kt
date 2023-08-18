@@ -10,6 +10,8 @@ object ConfigValue {
     const val MIN_SDK_VERSION = 21
     const val COMPILE_SDK_VERSION = SDK_VERSION
     const val TARGET_SDK_VERSION = SDK_VERSION
+    const val BaseNameSpace = "com.tdk.libs"
+    const val BaseResPrefix = "lib_"
 
     val JAVA_VERSION = JavaVersion.VERSION_17
 }
@@ -23,6 +25,8 @@ fun Project.configAndroidCommonLibs() {
             libs.androidx.appcompat,
             libs.androidx.core.ktx,
             libs.kotlinx.coroutines.android,
+            libs.koin.android,
+            libs.koin.core,
             libs.google.gson,
         )
 
@@ -39,9 +43,9 @@ fun Project.configTestLibs() {
     }
 }
 
-fun Project.configAsAppLibs(){
+fun Project.configAsAppLibs() {
     val libs = mylibs
-    dependencies{
+    dependencies {
         "androidTestImplementation"(libs.androidx.navigation.testing)
         "androidTestImplementation"(libs.accompanist.testharness)
         "androidTestImplementation"(kotlin("test"))
