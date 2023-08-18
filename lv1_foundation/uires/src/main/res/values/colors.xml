@@ -16,16 +16,16 @@
 -->
 <resources>
     <!-- Status bar -->
-    <color name="black30">#4D000000</color>
+    <color name="lib_uires_black30">#4D000000</color>
 
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="lib_uires_purple_200">#FFBB86FC</color>
+    <color name="lib_uires_purple_500">#FF6200EE</color>
+    <color name="lib_uires_purple_700">#FF3700B3</color>
+    <color name="lib_uires_teal_200">#FF03DAC5</color>
+    <color name="lib_uires_teal_700">#FF018786</color>
+    <color name="lib_uires_black">#FF000000</color>
+    <color name="lib_uires_white">#FFFFFFFF</color>
 
-    <color name="ic_launcher_background_tint">#000000</color>
-    <color name="ic_launcher_foreground_tint">#FCFCFC</color>
+    <color name="lib_uires_ic_launcher_background_tint">#000000</color>
+    <color name="lib_uires_ic_launcher_foreground_tint">#FCFCFC</color>
 </resources>

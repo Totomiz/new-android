@@ -66,3 +66,7 @@ android {
 }
 
 configAsAppLibs()
+
+dependencies{
+    implementation(project(":lv1_foundation:uires"))
+}

@@ -8,15 +8,16 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".MadApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Newandroid"
         tools:targetApi="31">
+        <!--   尝试 android:theme="@style/Theme.Tdk.Splash" 后会显示actionbar-->
         <activity
-            android:name=".HostActivity"
+            android:name=".ui.kosample.KoSampleActivity"
             android:exported="true"
             android:label="@string/title_activity_host"
-            android:theme="@style/Theme.Newandroid">
+            android:theme="@style/Theme.Tdk">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
