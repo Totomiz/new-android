@@ -33,6 +33,9 @@ import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 val Project.libs
     get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
+internal val Project.mylibs get() = project.extensions.getByName("libs") as org.gradle.accessors.dm.LibrariesForLibs
+
+
 fun <BuildFeaturesT: BuildFeatures, BuildTypeT: BuildType,
         DefaultConfigT: DefaultConfig, ProductFlavorT: ProductFlavor,
         AndroidResourcesT: AndroidResources>

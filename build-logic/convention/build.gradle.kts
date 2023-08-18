@@ -34,13 +34,20 @@ tasks.withType<KotlinCompile>().configureEach {
     }
 }
 
+//internal val Project.libs get() = project.extensions.getByName("libs") as org.gradle.accessors.dm.LibrariesForLibs
+
 dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.firebase.crashlytics.gradlePlugin)
     compileOnly(libs.firebase.performance.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    //目的是能获取主工程的toml对应的实现类
+    println(files(libs.javaClass.superclass.protectionDomain.codeSource.location)+" include")
+    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
+
+
 
 gradlePlugin {
     plugins {

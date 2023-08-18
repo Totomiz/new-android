@@ -17,6 +17,8 @@
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
 import com.newandroid.kscript.ConfigValue
+import com.newandroid.kscript.configAndroidCommonLibs
+import com.newandroid.kscript.configTestLibs
 import com.newandroid.kscript.configureFlavors
 import com.newandroid.kscript.configureGradleManagedDevices
 import com.newandroid.kscript.configureKotlinAndroid
@@ -26,8 +28,7 @@ import com.newandroid.kscript.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.kotlin
+
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -54,10 +55,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     force("org.objenesis:objenesis:2.6")
                 }
             }
-            dependencies {
-                add("androidTestImplementation", kotlin("test"))
-                add("testImplementation", kotlin("test"))
-            }
+            configAndroidCommonLibs()
+            configTestLibs()
         }
     }
 }
+

@@ -4,12 +4,12 @@ accompanist = "0.28.0"
 androidDesugarJdkLibs = "2.0.3"
 androidGradlePlugin = "8.1.0"
 androidxActivity = "1.8.0-alpha06"
-androidxAppCompat = "1.5.1"
-androidxBrowser = "1.4.0"
+androidxAppCompat = "1.6.1"
+androidxBrowser = "1.5.0"
 androidxComposeBom = "2023.06.01"
 androidxComposeCompiler = "1.5.0"
 androidxComposeRuntimeTracing = "1.0.0-alpha03"
-androidxCore = "1.9.0"
+androidxCore = "1.10.0"
 androidxCoreSplashscreen = "1.0.0"
 androidxDataStore = "1.0.0"
 androidxEspresso = "3.5.0"
@@ -138,6 +138,7 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 google-android-material = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
 google-accompanist-themeadapter-material = { module = "com.google.accompanist:accompanist-themeadapter-material", version.ref = "googleAccompanist" }
 google-accompanist-themeadapter-material3 = { module = "com.google.accompanist:accompanist-themeadapter-material3", version.ref = "googleaccompanist3" }
+google-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 firebase-crashlytics-gradlePlugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
