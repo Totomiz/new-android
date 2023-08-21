@@ -1,5 +1,5 @@
 /*
- * Copyright 2023  T Open Source Project . All rights reserved.
+ * Copyright 2023-Now T Open Source Project .
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  *
- *   Created by T on 2023/8/22.
  */
 
 
@@ -88,4 +87,5 @@ configAndroidxLibs()
 dependencies{
     implementation(project(":lv1_foundation:uires"))
     implementation(project(":lv1_foundation:log"))
+    implementation(project(":lv1_foundation:appcontext"))
 }

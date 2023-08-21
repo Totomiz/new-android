@@ -1,15 +1,29 @@
+/*
+ * Copyright 2023-Now T Open Source Project .
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       https://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ *
+ */
+
 package com.tz.mad
 
-import android.app.Application
-import android.util.Log
-import com.tz.app.ApplicationDelegate
-import com.tz.app.BaseApplication
-import com.tz.mad.di.appModules
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+/*
+ *  Created by T on 2023/8/21.
+ */
+import com.tdk.app.BaseApplication
+import com.tz.app.KoAppImpl
 
-private const val TAG = "MadApp"
+const val TAG = "MadApp"
 
 class MadApp : BaseApplication() {
 
@@ -17,19 +31,6 @@ class MadApp : BaseApplication() {
         super.onCreate()
     }
 
-    override fun getAppDelegate() = KoApp(this)
-
-
+    override fun getAppDelegate() = KoAppImpl(this)
 }
 
-class KoApp(application: Application) : ApplicationDelegate(application) {
-    override fun onCreate(application: Application) {
-        Log.d(TAG, "onCreate: ")
-        startKoin {
-            androidLogger()
-            androidContext(this@KoApp.application)
-            modules(appModules)
-        }
-    }
-
-}
