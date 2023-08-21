@@ -16,7 +16,9 @@
  *   Created by T on 2023/8/22.
  */
 
-package mod.star_inc.basic.utils
+@file:Suppress("DEPRECATION")
+
+package com.tdk.common.utils
 
 /*
  * Copyright (C) 2018 Drake, Inc.

@@ -16,6 +16,8 @@
  *   Created by T on 2023/8/22.
  */
 
+@file:Suppress("DEPRECATION")
+
 package com.tdk.common.extentions
 
 import android.annotation.TargetApi
