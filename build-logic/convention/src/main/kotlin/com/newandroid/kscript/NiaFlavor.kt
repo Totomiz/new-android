@@ -19,9 +19,9 @@ enum class NiaFlavor(val dimension: FlavorDimension, val applicationIdSuffix: St
     prod(FlavorDimension.contentType)
 }
 
-fun configureFlavors(
+inline fun configureFlavors(
     commonExtension: CommonExtension<*, *, *, *, *>,
-    flavorConfigurationBlock: ProductFlavor.(flavor: NiaFlavor) -> Unit = {}
+    crossinline flavorConfigurationBlock: ProductFlavor.(flavor: NiaFlavor) -> Unit = {}
 ) {
     commonExtension.apply {
         flavorDimensions += FlavorDimension.contentType.name

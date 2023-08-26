@@ -15,10 +15,10 @@
  */
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.newandroid.kscript.configureGradleManagedDevices
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.newandroid.kscript.ConfigValue
 import com.newandroid.kscript.configAndroidCommonLibs
+import com.newandroid.kscript.configAndroidDefaultConfig
+import com.newandroid.kscript.configureGradleManagedDevices
 import com.newandroid.kscript.configureKotlinAndroid
 import com.newandroid.kscript.configurePrintApksTask
 import org.gradle.api.Plugin
@@ -33,12 +33,13 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = ConfigValue.TARGET_SDK_VERSION
                 configureGradleManagedDevices(this)
             }
+            this.configAndroidDefaultConfig()
             extensions.configure<ApplicationAndroidComponentsExtension> {
                 configurePrintApksTask(this)
             }
+
             configAndroidCommonLibs()
         }
     }

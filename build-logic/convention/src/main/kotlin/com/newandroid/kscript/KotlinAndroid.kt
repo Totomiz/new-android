@@ -17,7 +17,6 @@
 package com.newandroid.kscript
 
 import com.android.build.api.dsl.CommonExtension
-import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.configure
@@ -34,9 +33,6 @@ internal fun Project.configureKotlinAndroid(
 ) {
     commonExtension.apply {
         compileSdk = ConfigValue.COMPILE_SDK_VERSION
-        defaultConfig {
-            minSdk = ConfigValue.MIN_SDK_VERSION
-        }
 
         compileOptions {
             // Up to Java 11 APIs are available through desugaring
@@ -50,7 +46,7 @@ internal fun Project.configureKotlinAndroid(
     configureKotlin()
 
     dependencies {
-        add("coreLibraryDesugaring", libs.findLibrary("android.desugarJdkLibs").get())
+        add("coreLibraryDesugaring", mylibs.android.desugarJdkLibs)
     }
 }
 
