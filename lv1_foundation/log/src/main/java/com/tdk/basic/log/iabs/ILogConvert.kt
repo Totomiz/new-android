@@ -18,11 +18,11 @@
 
 package com.tdk.basic.log.iabs
 
-interface ILogFormatter {
+interface ILogConvert {
 
     var config: IConfig?
 
-    fun formatMsgWithTag(tag: String?, vararg objs: Any): String
+    fun convertMsgWithTag(tag: String?, vararg objs: Any): String
 
-    fun formatMsg(vararg objs: Any): String
+    fun convertMsg(vararg objs: Any): String
 }

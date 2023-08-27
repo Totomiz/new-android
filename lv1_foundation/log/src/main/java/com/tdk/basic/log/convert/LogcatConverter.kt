@@ -16,9 +16,7 @@
  *   Created by T on 2023/8/21.
  */
 
-package com.tdk.basic.log.formatter
+package com.tdk.basic.log.convert
 
-import com.tdk.basic.log.iabs.AbsLogFormatter
-
-open class LogcatFormatter() : AbsLogFormatter() {
+open class LogcatConverter() : AbsLogConverter() {
 }

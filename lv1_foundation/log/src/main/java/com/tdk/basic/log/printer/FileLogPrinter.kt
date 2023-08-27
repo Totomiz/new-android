@@ -19,13 +19,42 @@
 package com.tdk.basic.log.printer
 
 import com.tdk.basic.log.config.LogLevel
-import com.tdk.basic.log.formatter.FilelogFormatter
-import com.tdk.basic.log.iabs.ILogFormatter
+import com.tdk.basic.log.config.getRealPriority
+import com.tdk.basic.log.convert.FileLogConverter
+import com.tdk.basic.log.disk.DiskRecord
+import com.tdk.basic.log.disk.TimeLogDiskRecord
+import com.tdk.basic.log.iabs.ILogConvert
 
 class FileLogPrinter() : AbsPrinter() {
 
-    override var logFormatter: ILogFormatter = FilelogFormatter()
+    var logFileDiskRecord: DiskRecord = TimeLogDiskRecord()
+
+    override var logFormatter: ILogConvert = FileLogConverter()
 
     override fun printf(logLevel: LogLevel, tag: String?, msg: String) {
+        val level = logLevel.getRealPriority()
+        val input = msg
+        var startIndex = 0
+        val chunkSize = MAX_LENGTH
+        while (startIndex < input.length) {
+            val endIndex = if (startIndex + chunkSize <= input.length) {
+                findLastNewlineIndex(input, startIndex, startIndex + chunkSize)
+            } else {
+                input.length
+            }
+            var substring = input.substring(startIndex, endIndex)
+            android.util.Log.println(level, tag, substring)
+            logFileDiskRecord.printf(logLevel, tag, substring)
+            startIndex = endIndex
+        }
+    }
+
+    inline fun findLastNewlineIndex(str: String, startIndex: Int, endIndex: Int): Int {
+        for (i in endIndex - 1 downTo startIndex) {
+            if (str[i] == '\n') {
+                return i + 1
+            }
+        }
+        return endIndex
     }
 }

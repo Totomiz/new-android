@@ -16,19 +16,8 @@
  *   Created by T on 2023/8/21.
  */
 
-package com.tdk.basic.log.iabs
+package com.tdk.basic.log.convert
 
-import com.tdk.basic.log.config.LogLevel
-import com.tdk.basic.log.config.LogLevel.ALL
+open class FileLogConverter() : AbsLogConverter() {
 
-abstract class IConfig() {
-    var enable: Boolean = true
-    var miniLevel: LogLevel = ALL
-    var defaultTag: String = "TLog"
-    var isUseDefaultTag: Boolean = true
-    var stackTrace: Int = 7
-    var showPlace: Boolean = true
-    var showClzName: Boolean = true
-    var showMethodName: Boolean = false
-    var placePrefixString: String = " "
 }

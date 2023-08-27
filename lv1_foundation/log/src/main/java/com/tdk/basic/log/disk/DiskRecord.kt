@@ -16,24 +16,37 @@
  *   Created by T on 2023/8/21.
  */
 
-package com.tdk.basic.log.iabs
+package com.tdk.basic.log.disk
 
 import com.tdk.basic.log.config.LogLevel
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.concurrent.Executor
+import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 
-interface IPrinter {
+abstract class DiskRecord {
 
-    /*打印者的名字*/
-    var name: String
+    open val executor: Executor by lazy(SYNCHRONIZED) {
+        IOLogExecutor()
+    }
 
-    /*Each printer has a config*/
-    var config: IConfig
+    companion object {
 
-    var logFormatter: ILogConvert
+    }
 
-    /*下发日志*/
-    fun dispatchLog(logLevel: LogLevel, tag: String?, vararg objs: Any)
+    open val logFileNameDateFormat = SimpleDateFormat("yyyy_MM_dd")
 
-    /*打印具体实现*/
-    fun printf(logLevel: LogLevel, tag: String?, msg: String)
+    abstract fun getLogHeader(): String?
+
+    abstract fun getLogDir(): String
+
+    /**
+     * 日志文件名生成，不包含路径
+     * @return String? 为空则创建失败
+     */
+    abstract fun createLogFile(parentDir: File, timeInMillis: Long): File?
+
+    //记录日志
+    abstract fun printf(logLevel: LogLevel, tag: String?, msg: String)
 }
 

@@ -16,12 +16,14 @@
  *   Created by T on 2023/8/21.
  */
 
-package com.tdk.basic.log.iabs
+package com.tdk.basic.log.convert
 
 import android.util.Log
+import com.tdk.basic.log.iabs.IConfig
+import com.tdk.basic.log.iabs.ILogConvert
 import com.tdk.basic.log.place
 
-abstract class AbsLogFormatter() : ILogFormatter {
+abstract class AbsLogConverter() : ILogConvert {
 
     companion object {
         val lineSeparator = System.lineSeparator()
@@ -29,28 +31,15 @@ abstract class AbsLogFormatter() : ILogFormatter {
     }
 
     override var config: IConfig? = null
+    val sb = StringBuilder()
 
-    override fun formatMsgWithTag(tag: String?, vararg objs: Any): String {
+    override fun convertMsgWithTag(tag: String?, vararg objs: Any): String {
         return buildMsg(tag, *objs)
     }
 
-    override fun formatMsg(vararg objs: Any): String {
+    override fun convertMsg(vararg objs: Any): String {
         return buildMsg(null, *objs)
     }
-
-    fun msgToString(msg: Any?): String {
-        var str: String = ""
-        if (msg != null) {
-            str = if (msg is Throwable) {
-                Log.getStackTraceString(msg)
-            } else {
-                msg.toString()
-            }
-        }
-        return str
-    }
-
-    val sb = StringBuilder()
 
     fun buildMsg(tag: String?, vararg objs: Any): String {
         synchronized(sb) {

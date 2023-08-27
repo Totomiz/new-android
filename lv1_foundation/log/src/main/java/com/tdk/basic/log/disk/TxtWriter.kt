@@ -1,5 +1,5 @@
 /*
- * Copyright 2023  T Open Source Project . All rights reserved.
+ * Copyright 2023-Now T Open Source Project .
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -13,22 +13,16 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  *
- *   Created by T on 2023/8/21.
  */
 
-package com.tdk.basic.log.iabs
+package com.tdk.basic.log.disk
 
-import com.tdk.basic.log.config.LogLevel
-import com.tdk.basic.log.config.LogLevel.ALL
+import java.io.File
 
-abstract class IConfig() {
-    var enable: Boolean = true
-    var miniLevel: LogLevel = ALL
-    var defaultTag: String = "TLog"
-    var isUseDefaultTag: Boolean = true
-    var stackTrace: Int = 7
-    var showPlace: Boolean = true
-    var showClzName: Boolean = true
-    var showMethodName: Boolean = false
-    var placePrefixString: String = " "
+//
+// Added by T on 2023/8/26.
+//
+internal open class TxtWriter {
+    open fun writeToLogFile(file: File, text: String, startLine: Int, maxFileSizeIn: Long) {}
 }
+

@@ -20,9 +20,9 @@ package com.tdk.basic.log.printer
 
 import com.tdk.basic.log.TLogRegister
 import com.tdk.basic.log.config.LogLevel
-import com.tdk.basic.log.formatter.LogcatFormatter
+import com.tdk.basic.log.convert.LogcatConverter
 import com.tdk.basic.log.iabs.IConfig
-import com.tdk.basic.log.iabs.ILogFormatter
+import com.tdk.basic.log.iabs.ILogConvert
 import com.tdk.basic.log.iabs.IPrinter
 
 abstract class AbsPrinter() : IPrinter {
@@ -35,7 +35,7 @@ abstract class AbsPrinter() : IPrinter {
         get() = TLogRegister.getPrinterConfig(this.name)!!
         set(value) {}
 
-    override var logFormatter: ILogFormatter = LogcatFormatter()
+    override var logFormatter: ILogConvert = LogcatConverter()
 
     override fun dispatchLog(logLevel: LogLevel, tag: String?, vararg objs: Any) {
 
@@ -48,9 +48,9 @@ abstract class AbsPrinter() : IPrinter {
         }
         logFormatter.config = config
         if (config.isUseDefaultTag) {
-            printf(logLevel, config.defaultTag, logFormatter.formatMsgWithTag(tag, *objs))
+            printf(logLevel, config.defaultTag, logFormatter.convertMsgWithTag(tag, *objs))
         } else {
-            printf(logLevel, tag, logFormatter.formatMsg(*objs))
+            printf(logLevel, tag, logFormatter.convertMsg(*objs))
         }
     }
 

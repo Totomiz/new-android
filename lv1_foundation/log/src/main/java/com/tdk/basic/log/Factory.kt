@@ -18,7 +18,6 @@
 
 package com.tdk.basic.log
 
-import android.util.Log
 import com.tdk.basic.log.iabs.IConfig
 import com.tdk.basic.log.iabs.LoggerFactory
 import com.tdk.basic.log.printer.CrashLogPrinter
@@ -31,7 +30,6 @@ class DefaultFactory : LoggerFactory<DefaultLogImpl> {
         return DefaultLogImpl().also {
 
             if (TLogRegister.getPrinterConfig<IConfig>(LogcatPrinter::class.java) != null) {
-                Log.d("TLog", "getPrinterConfig: ")
                 it.addPrinter(LogcatPrinter())
             }
 
