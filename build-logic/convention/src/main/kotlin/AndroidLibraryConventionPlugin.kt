@@ -22,6 +22,7 @@ import com.newandroid.kscript.configTestLibs
 import com.newandroid.kscript.configureFlavors
 import com.newandroid.kscript.configureGradleManagedDevices
 import com.newandroid.kscript.configureKotlinAndroid
+import com.newandroid.kscript.configureNdkDefaultConfig
 import com.newandroid.kscript.configurePrintApksTask
 import com.newandroid.kscript.disableUnnecessaryAndroidTests
 import com.newandroid.kscript.libs
@@ -41,9 +42,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 configureKotlinAndroid(this)
                 configureFlavors(this)
                 configureGradleManagedDevices(this)
+                configureNdkDefaultConfig(this)
             }
 
             this.configAndroidLibDefaultConfig()
+
 
             extensions.configure<LibraryAndroidComponentsExtension> {
                 configurePrintApksTask(this)

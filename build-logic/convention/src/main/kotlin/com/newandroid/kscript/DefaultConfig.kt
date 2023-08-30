@@ -18,6 +18,7 @@
 package com.newandroid.kscript
 
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
@@ -57,5 +58,35 @@ inline fun Project.configAndroidLibDefaultConfig() {
         }
         namespace = ConfigValue.BaseNameSpace + "." + name
         resourcePrefix = ConfigValue.BaseResPrefix + name + "_"
+    }
+}
+
+internal fun Project.configureNdkDefaultConfig(
+    commonExtension: CommonExtension<*, *, *, *, *>,
+) {
+    commonExtension.apply {
+        defaultConfig {
+            ndkVersion = "23.0.7599858"
+            externalNativeBuild {
+                cmake {
+                    cppFlags += "-std=c++11"
+                }
+            }
+            ndk {
+                abiFilters.add("armeabi-v7a")
+                abiFilters.add("arm64-v8a") // 替换为你需要的 ABI 架构类型
+            }
+        }
+
+        val cmakeListsFile = file("src/main/cpp/CMakeLists.txt")
+        if (cmakeListsFile.exists()) {
+            externalNativeBuild {
+                cmake {
+                    path = cmakeListsFile
+                    version = "3.22.1"
+                }
+            }
+        }
+
     }
 }

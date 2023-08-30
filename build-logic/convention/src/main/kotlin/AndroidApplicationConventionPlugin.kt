@@ -20,6 +20,7 @@ import com.newandroid.kscript.configAndroidCommonLibs
 import com.newandroid.kscript.configAndroidDefaultConfig
 import com.newandroid.kscript.configureGradleManagedDevices
 import com.newandroid.kscript.configureKotlinAndroid
+import com.newandroid.kscript.configureNdkDefaultConfig
 import com.newandroid.kscript.configurePrintApksTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -34,8 +35,10 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 configureGradleManagedDevices(this)
+                configureNdkDefaultConfig(this)
             }
             this.configAndroidDefaultConfig()
+
             extensions.configure<ApplicationAndroidComponentsExtension> {
                 configurePrintApksTask(this)
             }
