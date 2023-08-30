@@ -17,12 +17,10 @@
 
 package com.tdk.basic.log.disk
 
-import java.io.File
-
 //
 // Added by T on 2023/8/26.
 //
-internal open class TxtWriter {
-    open fun writeToLogFile(file: File, text: String, startLine: Int, maxFileSizeIn: Long) {}
+open class TxtWriter {
+    open fun writeToLogFile(filePath: String, text: String, startLine: Int, maxFileSizeIn: Long) {}
 }
 

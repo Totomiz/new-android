@@ -32,20 +32,20 @@ open class TimeLogDiskRecord(
     val logFileHeader: String? = LOG_HEARD_INFO,
     val logKeepTime: Long = TimeUnit.DAYS.toSeconds(7),
     val createInterval: Long = TimeUnit.HOURS.toSeconds(1),
-    val maxFileSizeIn: Long = (10 * 1024 * 1024).toLong(), // 最大文件大小为10M，可根据需求修改
-    val fileName: String = "myapp2.log"
+    val maxFileSizeIn: Long = (100 * 1024 * 1024).toLong(), // 最大文件大小为10M，可根据需求修改
+    val fileName: String = "myapp2.log",
+    val txtWriter: TxtWriter = RandomTxtWriter()
 ) : DiskRecord() {
 
     private var currentLogFilePath: String? = null
     private val sb = StringBuilder()
-    private val txtWriter: TxtWriter = LineTxtWriter()
     override fun getLogHeader(): String? = logFileHeader
 
     override fun getLogDir(): String = logDirPath
 
     private fun writeToLogFile(file: File, text: String) {
         val startLine = logFileHeader?.lines()?.size ?: 1
-        txtWriter.writeToLogFile(file, text, startLine, maxFileSizeIn)
+        txtWriter.writeToLogFile(file.absolutePath, text, startLine, maxFileSizeIn)
     }
 
     override fun createLogFile(parent: File, timeInMillis: Long): File? {

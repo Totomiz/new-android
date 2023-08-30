@@ -23,21 +23,24 @@ import java.io.FileWriter
 //
 // Added by T on 2023/8/26.
 //
+@Deprecated("OOM")
 internal class FileTxtWriter : TxtWriter() {
 
     // 函数用于在文件末尾写入文字
     override inline fun writeToLogFile(
-        file: File,
+        filePath: String,
         text: String,
         startLine: Int,
         maxFileSizeIn: Long
     ) {
+        val file = File(filePath)
         val currentSize = file.length()
         val maxSize = maxFileSizeIn
 
         if (currentSize >= maxSize) {
-            deleteLinesFromStartToM(file, startLine, text.length)
+            deleteLinesFromStartToM(filePath, startLine, text.length)
         }
+
 
         FileWriter(file, true).use { writer ->
             writer.appendLine()
@@ -46,7 +49,8 @@ internal class FileTxtWriter : TxtWriter() {
     }
 
     // 函数用于删除文件中从指定起始行到指定行数（根据内容大小计算）的内容
-    inline fun deleteLinesFromStartToM(file: File, startLine: Int, textSize: Int) {
+    inline fun deleteLinesFromStartToM(filePath: String, startLine: Int, textSize: Int) {
+        val file = File(filePath)
         val lines = file.useLines { it.toList().toMutableList() }
 
         var cumulativeSize = 0

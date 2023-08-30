@@ -27,16 +27,17 @@ internal class RandomTxtWriter : TxtWriter() {
 
     // 函数用于在文件末尾写入文字
     override inline fun writeToLogFile(
-        file: File,
+        filePath: String,
         text: String,
         startLine: Int,
         maxFileSizeIn: Long
     ) {
+        val file = File(filePath)
         val currentSize = file.length()
         val maxSize = maxFileSizeIn
 
         if (currentSize >= maxSize) {
-            deleteLinesFromStartToM(file, startLine, text)
+            deleteLinesFromStartToM(filePath, startLine, text)
         }
 
         RandomAccessFile(file, "rw").use { randomAccessFile ->
@@ -46,7 +47,8 @@ internal class RandomTxtWriter : TxtWriter() {
         }
     }
 
-    internal inline fun deleteLinesFromStartToM(file: File, startLine: Int, text: String) {
+    internal inline fun deleteLinesFromStartToM(filePath: String, startLine: Int, text: String) {
+        val file = File(filePath)
         val charset = Charsets.UTF_8 // 假设文件使用UTF-8编码
 
         val linesToDelete = text.lines().size
