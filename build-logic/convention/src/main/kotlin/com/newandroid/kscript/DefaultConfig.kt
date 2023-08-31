@@ -75,6 +75,8 @@ internal fun Project.configureNdkDefaultConfig(
             ndk {
                 abiFilters.add("armeabi-v7a")
                 abiFilters.add("arm64-v8a") // 替换为你需要的 ABI 架构类型
+                abiFilters.add("x86_64")
+                abiFilters.add("x86")
             }
         }
 

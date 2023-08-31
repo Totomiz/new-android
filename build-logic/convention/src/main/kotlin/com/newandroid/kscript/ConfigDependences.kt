@@ -131,3 +131,12 @@ fun Project.configMyComposeLibs() {
         "androidTestImplementation"(libs.androidx.compose.ui.test)
     }
 }
+
+fun Project.configureDemoPluginDependence() {
+    dependencies {
+
+        "implementation"(project(":lv1_foundation:uires"))
+        "implementation"(project(":lv1_foundation:log"))
+        "implementation"(project(":lv1_foundation:appcontext"))
+    }
+}

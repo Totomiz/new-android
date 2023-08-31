@@ -24,8 +24,10 @@ import com.newandroid.kscript.configAndroidxLibs
 import com.newandroid.kscript.configMyComposeLibs
 import com.newandroid.kscript.configTestLibs
 import com.newandroid.kscript.configureAndroidCompose
+import com.newandroid.kscript.configureDemoPluginDependence
 import com.newandroid.kscript.configureGradleManagedDevices
 import com.newandroid.kscript.configureKotlinAndroid
+import com.newandroid.kscript.configureNdkDefaultConfig
 import com.newandroid.kscript.configurePrintApksTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -34,6 +36,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
 
 class DemoAppPlugin : Plugin<Project> {
+
     override fun apply(target: Project) {
 
         with(target) {
@@ -42,6 +45,7 @@ class DemoAppPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 configureGradleManagedDevices(this)
+                configureNdkDefaultConfig(this)
             }
             configAndroidDefaultConfig()
             extensions.configure<ApplicationAndroidComponentsExtension> {
@@ -52,6 +56,7 @@ class DemoAppPlugin : Plugin<Project> {
             configMyComposeLibs()
             configTestLibs()
             configAndroidxLibs()
+            configureDemoPluginDependence()
         }
     }
 
