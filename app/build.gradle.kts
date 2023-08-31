@@ -75,6 +75,9 @@ android {
             isIncludeAndroidResources = true
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 configAndroidxLibs()

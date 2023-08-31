@@ -49,3 +49,6 @@ include(":lv2_ability:login")
 
 include(":lv3_feature:business1")
 
+include(":demos:fdtest")
+include(":demos:demo_zygote")
+
