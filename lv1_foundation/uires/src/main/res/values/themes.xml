@@ -18,7 +18,7 @@
 
     <!-- Allows us to override night specific attributes in the
          values-night folder. -->
-    <style name="LibUiresNightAdjusted.Theme.Tdk" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="LibUires.NightAdjusted.Theme.Tdk" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/lib_uires_purple_500</item>
         <item name="colorPrimaryVariant">@color/lib_uires_purple_700</item>
@@ -35,16 +35,16 @@
     </style>
 
     <!-- The final theme we use -->
-    <style name="LibUiresTheme.Tdk" parent="NightAdjusted.Theme.Tdk" />
+    <style name="LibUires.Theme.Tdk" parent="LibUires.NightAdjusted.Theme.Tdk" />
 
-    <style name="LibUiresNightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+    <style name="LibUires.NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 
-    <style name="LibUiresTheme.Tdk.Splash" parent="NightAdjusted.Theme.Splash">
+    <style name="LibUiresTheme.Tdk.Splash" parent="LibUires.NightAdjusted.Theme.Splash">
         <item name="windowSplashScreenAnimatedIcon">@drawable/lib_uires_ic_splash</item>
-        <item name="postSplashScreenTheme">@style/LibUiresTheme.Tdk</item>
+        <item name="postSplashScreenTheme">@style/LibUires.Theme.Tdk</item>
     </style>
 
 </resources>
