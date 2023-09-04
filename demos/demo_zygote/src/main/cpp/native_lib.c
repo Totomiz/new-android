@@ -34,6 +34,15 @@ Java_com_tdk_jni_JniTools_copyByFileDescriptor(JNIEnv *env, jclass cls, jobject 
 
 JNIEXPORT void JNICALL
 Java_com_tdk_jni_JniTools_copyByPath(JNIEnv *env, jclass cls, jstring srcPath, jstring dstPath) {
+    //JNIEnv 在c++中是一个结构体的别名
+    // *env 是一个一级指针
+    // c++字符转为一个java字符写法 env->NewStringUTF("C++ string")
+
+    //JNIEnv 在c中是一个结构体指针
+    // *env 是一个二级指针
+    // c 中字符串转换为一个java字符串写法 *env->NewStringUTF(env,"C string")
+
+
     int inFd = open((*env)->GetStringUTFChars(env, srcPath, NULL), O_RDONLY);
     int outFd = open((*env)->GetStringUTFChars(env, dstPath, NULL), O_WRONLY | O_CREAT | O_TRUNC,
                      0644);
