@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 
 JNIEXPORT void JNICALL
@@ -19,6 +20,29 @@ Java_com_tdk_jni_JniTools_copyByFd(JNIEnv *env, jclass cls, jint inFd, jint outF
     }
 }
 
+void copyByFdWithCSTD(JNIEnv *env, jclass cls, jint inFd, jint outFd) {
+    FILE *srcFile = fdopen(inFd, "r");
+    FILE *destFile = fdopen(outFd, "w");
+
+    if (srcFile == NULL || destFile == NULL) {
+        // 转换失败
+        perror("fdopen");
+        return;
+    }
+
+    // 从源文件读取内容，并将结果写入目标文件
+    char buffer[1024];
+    size_t bytesRead;
+
+    while ((bytesRead = fread(buffer, sizeof(char), sizeof(buffer), srcFile)) > 0) {
+        fwrite(buffer, sizeof(char), bytesRead, destFile);
+    }
+
+    fclose(srcFile);   // 关闭源文件指针
+    fclose(destFile);  // 关闭目标文件指针
+
+}
+
 JNIEXPORT void JNICALL
 Java_com_tdk_jni_JniTools_copyByFileDescriptor(JNIEnv *env, jclass cls, jobject srcFd,
                                                jobject dstFd) {
@@ -28,8 +52,11 @@ Java_com_tdk_jni_JniTools_copyByFileDescriptor(JNIEnv *env, jclass cls, jobject 
     int outFd = (*env)->GetIntField(env, dstFd,
                                     (*env)->GetFieldID(env, (*env)->GetObjectClass(env, dstFd),
                                                        "fd", "I"));
-
+    //使用内核 IO
     Java_com_tdk_jni_JniTools_copyByFd(env, cls, inFd, outFd);
+
+    //使用c库标准IO
+    //copyByFdWithCSTD(env, cls, inFd, outFd);
 }
 
 JNIEXPORT void JNICALL
