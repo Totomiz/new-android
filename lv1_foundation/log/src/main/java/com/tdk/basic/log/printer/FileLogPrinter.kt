@@ -18,18 +18,18 @@
 
 package com.tdk.basic.log.printer
 
+import com.tdk.basic.log.ConfigMap
 import com.tdk.basic.log.config.LogLevel
 import com.tdk.basic.log.config.getRealPriority
 import com.tdk.basic.log.convert.FileLogConverter
 import com.tdk.basic.log.disk.DiskRecord
 import com.tdk.basic.log.disk.TimeLogDiskRecord
+import com.tdk.basic.log.iabs.IConfig
 import com.tdk.basic.log.iabs.ILogConvert
 
-class FileLogPrinter() : AbsPrinter() {
-
-    var logFileDiskRecord: DiskRecord = TimeLogDiskRecord()
-
-    override var logFormatter: ILogConvert = FileLogConverter()
+open class FileLogPrinter(
+    var logFileDiskRecord: DiskRecord = TimeLogDiskRecord(),
+) : AbsPrinter() {
 
     override fun printf(logLevel: LogLevel, tag: String?, msg: String) {
         val level = logLevel.getRealPriority()

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023  T Open Source Project . All rights reserved.
+ * Copyright 2023-Now T Open Source Project .
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -13,27 +13,20 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  *
- *   Created by T on 2023/8/21.
  */
 
-package com.tdk.basic.log.iabs
+package com.tdk.basic.log.task
 
-import com.tdk.basic.log.ConfigMap
 import com.tdk.basic.log.config.LogLevel
+import com.tdk.basic.log.disk.DiskRecord
+import com.tdk.basic.log.disk.TimeLogDiskRecord
 
-interface IPrinter {
+//
+// Added by T on 2023/9/3.
+//
+class FileLogTask(var logFileDiskRecord: DiskRecord = TimeLogDiskRecord()) : Task {
 
-    /*打印者的名字*/
-    val name: String
-
-    /*Each printer has a config*/
-    var config: IConfig
-
-    var logFormatter: ILogConvert
-
-    /*下发日志*/
-    fun dispatchLog(logLevel: LogLevel, tag: String?, vararg objs: Any)
-
-    /*打印具体实现*/
-    fun printf(logLevel: LogLevel, tag: String?, msg: String)
+    override fun doTask(logLevel: LogLevel, tag: String?, msg: String) {
+        logFileDiskRecord.printf(logLevel, tag, msg)
+    }
 }

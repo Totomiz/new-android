@@ -25,6 +25,9 @@ import com.tdk.basic.log.config.LogLevel.RI
 import com.tdk.basic.log.config.LogLevel.V
 import com.tdk.basic.log.config.LogLevel.W
 import com.tdk.basic.log.iabs.ILogger
+import com.tdk.basic.log.task.AndroidLogTask
+import com.tdk.basic.log.task.FileLogTask
+import com.tdk.basic.log.printer.LogcatPrinter
 
 /**
  * <p>
@@ -88,4 +91,15 @@ object TLog {
     fun ri(tag: String, vararg objs: Any) {
         logger.print(RI, tag, *objs)
     }
+}
+
+fun TLog.configure(setUp: (ConfigMap) -> Unit) {
+    setUp(ConfigMap)
+    logger = factory.create()
+    LogcatPrinter()
+        .addTask(AndroidLogTask())
+        .addTask(FileLogTask())
+        .addTask { logLevel, tag, msg ->
+
+        }
 }

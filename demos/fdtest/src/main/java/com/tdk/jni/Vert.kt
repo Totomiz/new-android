@@ -14,10 +14,9 @@
  *   limitations under the License.
  *
  */
-package com.tdk
+package com.tdk.jni
 
 import android.content.Context
-import com.tdk.jni.JniTools
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.concurrent.atomic.AtomicInteger

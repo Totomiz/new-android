@@ -2,7 +2,6 @@ package com.tz.mad.ui.kosample
 
 import androidx.lifecycle.ViewModel
 import com.tz.mad.domain.KoUseCase
-import com.tz.mad.repo.UserRepo
 
 class KoViewModel(val useCase: KoUseCase):ViewModel() {
 

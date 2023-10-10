@@ -18,6 +18,7 @@
 package com.tz.mad.ui.kosample
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,12 +28,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
 import com.tdk.basic.log.TLog
 import com.tz.mad.ui.theme.NewandroidTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.Int.Companion
 
 class KoSampleActivity : ComponentActivity() {
 
@@ -50,25 +55,38 @@ class KoSampleActivity : ComponentActivity() {
                     Greeting(vm.sayHello("Android"))
                 }
             }
-            TLog.i("aaa", "onCreate: ")
-            TLog.i("onCreate: ")
-            TLog.i("onCreate: ", this)
-            TLog.i(this)
-            TLog.e("onCreate: ")
-            TLog.d("onCreate: ")
-            TLog.w("onCreate: ")
-            TLog.e("onCreate: ", Exception("aaa"))
-            TLog.e("onCreate: ", "AAAA", Exception("CCCC"), "GGGGGG")
 
         }
-        GlobalScope.launch(Dispatchers.IO) {
-            for (index in 1 until 10) {
-                //同步执行
-                launch {
-                    TLog.d("launch$index", "启动一个协程")
-                }
-            }
-        }
+        val a = Exception("aaa")
+        val index = AtomicInteger()
+
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            //同步执行
+//            launch {
+//
+//                while (true) {
+//                    delay(500)
+//                    TLog.i("aaa", "onCreate: ")
+//                    TLog.i("onCreate: ")
+//                    TLog.i("onCreate: ", this)
+//                    TLog.i(this)
+//                    TLog.e("onCreate: ")
+//                    TLog.d("onCreate: ")
+//                    TLog.w("onCreate: ")
+//                    TLog.e("onCreate: ", Exception("aaa"))
+//                    TLog.e("onCreate: ", "AAAA", Exception("CCCC"), "GGGGGG$")
+//                    TLog.d("launch${index.getAndDecrement()}", "启动一个协程", a)
+//                }
+//            }
+//        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            vm.setUp()
+//            vm.testCopy()
+//        }
     }
 
     override fun onStop() {

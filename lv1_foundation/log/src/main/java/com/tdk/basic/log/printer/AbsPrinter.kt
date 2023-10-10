@@ -18,7 +18,8 @@
 
 package com.tdk.basic.log.printer
 
-import com.tdk.basic.log.TLogRegister
+import com.tdk.basic.log.ConfigMap
+import com.tdk.basic.log.task.Task
 import com.tdk.basic.log.config.LogLevel
 import com.tdk.basic.log.convert.LogcatConverter
 import com.tdk.basic.log.iabs.IConfig
@@ -26,16 +27,45 @@ import com.tdk.basic.log.iabs.ILogConvert
 import com.tdk.basic.log.iabs.IPrinter
 
 abstract class AbsPrinter() : IPrinter {
+
     companion object {
-        val lineSeparator = System.lineSeparator()
-        val MAX_LENGTH = 4000
+        val lineseparator = System.lineSeparator()
+        const val MAX_LENGTH = 4000
+    }
+
+    private var _config: IConfig? = null
+
+    internal val tasks: MutableList<Task> = mutableListOf()
+
+    fun tasks(): MutableList<Task> = tasks
+
+    fun addTask(task: Task) = apply {
+        tasks += task
+    }
+
+    @JvmName("-addTask") // Prefix with '-' to prevent ambiguous overloads from Java.
+    inline fun addTask(crossinline block: (logLevel: LogLevel, tag: String?, msg: String) -> Unit) =
+        addTask(Task { logLevel, tag, msg ->
+            block(logLevel, tag, msg)
+        })
+
+    private var _logFormatter: ILogConvert = LogcatConverter().also {
+        it.config = this.config
     }
 
     override var config: IConfig
-        get() = TLogRegister.getPrinterConfig(this.name)!!
-        set(value) {}
+        get() = _config ?: ConfigMap.getPrinterConfig<IConfig>(name).also { _config = it }
+        set(value) {
+            _config = value
+        }
 
-    override var logFormatter: ILogConvert = LogcatConverter()
+    override var logFormatter: ILogConvert
+        get() = _logFormatter
+        set(value) {
+            this._logFormatter = value.also {
+                it.config = this.config
+            }
+        }
 
     override fun dispatchLog(logLevel: LogLevel, tag: String?, vararg objs: Any) {
 
@@ -46,7 +76,6 @@ abstract class AbsPrinter() : IPrinter {
         if (logLevel.logLevel < config.miniLevel.logLevel) {
             return
         }
-        logFormatter.config = config
         if (config.isUseDefaultTag) {
             printf(logLevel, config.defaultTag, logFormatter.convertMsgWithTag(tag, *objs))
         } else {
@@ -57,9 +86,8 @@ abstract class AbsPrinter() : IPrinter {
     override fun printf(logLevel: LogLevel, tag: String?, msg: String) {
     }
 
-    override var name: String
+    override val name: String
         get() = this.javaClass.name
-        set(value) {}
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

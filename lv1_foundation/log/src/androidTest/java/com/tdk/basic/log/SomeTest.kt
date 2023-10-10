@@ -58,7 +58,7 @@ class SomeTest {
 //        TLogRegister.registerDefaultLogcatPrinterConfig(LogcatPrinterConfig().apply {
 //            miniLevel = if (debug) ALL else RI
 //        })
-        TLogRegister.registerDefaultFilePrinterConfig(LogcatPrinterConfig().apply {
+        ConfigMap.registerDefaultFilePrinterConfig(LogcatPrinterConfig().apply {
             miniLevel = if (debug) ALL else RI
         })
     }

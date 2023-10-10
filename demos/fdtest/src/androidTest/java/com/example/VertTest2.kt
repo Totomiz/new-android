@@ -19,7 +19,7 @@ package com.example
 
 import android.app.Application
 import androidx.test.platform.app.InstrumentationRegistry
-import com.tdk.Vert
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
@@ -34,7 +34,7 @@ import java.util.concurrent.atomic.AtomicInteger
 //
 // Added by T on 2023/8/30.
 //
-class VertTest {
+class VertTest2 {
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
     private var test_block_string = ""
     val blockSize = 1 * 1024 * 1024 // 4 MB

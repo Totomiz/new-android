@@ -19,7 +19,7 @@ package com.example
 
 import android.app.Application
 import androidx.test.platform.app.InstrumentationRegistry
-import com.tdk.Vert
+import com.tdk.jni.Vert
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain

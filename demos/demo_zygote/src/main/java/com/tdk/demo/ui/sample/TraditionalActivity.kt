@@ -21,7 +21,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.tdk.Vert
+import com.tdk.jni.Vert
 import com.tdk.app.appCtx
 import com.tdk.demo.demo_zygote.databinding.TraditionalActivityBinding
 import kotlinx.coroutines.Dispatchers

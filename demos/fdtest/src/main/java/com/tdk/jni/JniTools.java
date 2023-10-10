@@ -1,5 +1,5 @@
 /*
- * Copyright 2023  T Open Source Project . All rights reserved.
+ * Copyright 2023-Now T Open Source Project .
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -13,27 +13,24 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  *
- *   Created by T on 2023/8/21.
  */
 
-package com.tdk.basic.log.iabs
+package com.tdk.jni;//
 
-import com.tdk.basic.log.ConfigMap
-import com.tdk.basic.log.config.LogLevel
 
-interface IPrinter {
+import java.io.FileDescriptor;
 
-    /*打印者的名字*/
-    val name: String
+// 2023/8/31.
+//
+public class JniTools {
+    static {
+        System.loadLibrary("myutil");
+    }
 
-    /*Each printer has a config*/
-    var config: IConfig
+    public native static void copyByFd(int inFd, int outFd);
 
-    var logFormatter: ILogConvert
+    public native static void copyByFileDescriptor(FileDescriptor srcFd, FileDescriptor dstFd);
 
-    /*下发日志*/
-    fun dispatchLog(logLevel: LogLevel, tag: String?, vararg objs: Any)
+    public native static void copyByPath(String srcPath, String dstPath);
 
-    /*打印具体实现*/
-    fun printf(logLevel: LogLevel, tag: String?, msg: String)
 }

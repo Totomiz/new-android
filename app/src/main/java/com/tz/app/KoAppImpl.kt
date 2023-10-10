@@ -20,7 +20,7 @@ package com.tz.app
 import android.app.ActivityThread
 import android.app.Application
 import com.tdk.basic.log.TLog
-import com.tdk.basic.log.TLogRegister
+import com.tdk.basic.log.ConfigMap
 import com.tdk.basic.log.config.LogLevel.ALL
 import com.tdk.basic.log.config.LogLevel.RI
 import com.tdk.basic.log.config.impl.LogcatPrinterConfig
@@ -33,7 +33,10 @@ import org.koin.core.context.startKoin
 class KoAppImpl(application: Application) : com.tdk.app.ApplicationDelegate(application) {
     init {
         val debug = true
-        TLogRegister.registerDefaultLogcatPrinterConfig(LogcatPrinterConfig().apply {
+//        TLogRegister.registerDefaultLogcatPrinterConfig(LogcatPrinterConfig().apply {
+//            miniLevel = if (debug) ALL else RI
+//        })
+        ConfigMap.registerDefaultFilePrinterConfig(LogcatPrinterConfig().apply {
             miniLevel = if (debug) ALL else RI
         })
     }

@@ -67,6 +67,9 @@ class LogcatPrinter() : AbsPrinter() {
                 input.length
             }
             val substring = input.substring(startIndex, endIndex)
+            tasks.forEach {
+                it.doTask(logLevel, tag, substring)
+            }
             android.util.Log.println(level, tag, substring)
             startIndex = endIndex
         }

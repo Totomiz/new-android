@@ -19,7 +19,7 @@ package com.tdk.basic.log.disk
 
 import android.app.Application
 import androidx.test.platform.app.InstrumentationRegistry
-import com.tdk.basic.log.TLogRegister
+import com.tdk.basic.log.ConfigMap
 import com.tdk.basic.log.appCtx
 import com.tdk.basic.log.config.LogLevel.ALL
 import com.tdk.basic.log.config.LogLevel.I
@@ -60,7 +60,7 @@ class TimeLogDiskRecordTest {
 //        TLogRegister.registerDefaultLogcatPrinterConfig(LogcatPrinterConfig().apply {
 //            miniLevel = if (debug) ALL else RI
 //        })
-        TLogRegister.registerDefaultFilePrinterConfig(LogcatPrinterConfig().apply {
+        ConfigMap.registerDefaultFilePrinterConfig(LogcatPrinterConfig().apply {
             miniLevel = if (debug) ALL else RI
         })
 

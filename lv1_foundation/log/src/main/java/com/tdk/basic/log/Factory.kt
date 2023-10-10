@@ -28,18 +28,18 @@ class DefaultFactory : LoggerFactory<DefaultLogImpl> {
 
     override fun create(): DefaultLogImpl {
         return DefaultLogImpl().also {
-
-            if (TLogRegister.getPrinterConfig<IConfig>(LogcatPrinter::class.java) != null) {
-                it.addPrinter(LogcatPrinter())
-            }
-
-            if (TLogRegister.getPrinterConfig<IConfig>(FileLogPrinter::class.java) != null) {
-                it.addPrinter(FileLogPrinter())
-            }
-
-            if (TLogRegister.getPrinterConfig<IConfig>(CrashLogPrinter::class.java) != null) {
-                it.addPrinter(CrashLogPrinter())
-            }
+            it.addPrinter(LogcatPrinter())
+//            if (ConfigMap.getPrinterConfig<IConfig>(LogcatPrinter::class.java) != null) {
+//                it.addPrinter(LogcatPrinter())
+//            }
+//
+//            if (ConfigMap.getPrinterConfig<IConfig>(FileLogPrinter::class.java) != null) {
+//                it.addPrinter(FileLogPrinter())
+//            }
+//
+//            if (ConfigMap.getPrinterConfig<IConfig>(CrashLogPrinter::class.java) != null) {
+//                it.addPrinter(CrashLogPrinter())
+//            }
         }
     }
 }

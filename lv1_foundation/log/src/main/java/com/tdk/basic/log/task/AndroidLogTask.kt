@@ -15,22 +15,17 @@
  *
  */
 
-package com.tdk.jni;//
+package com.tdk.basic.log.task
 
+import com.tdk.basic.log.config.LogLevel
+import com.tdk.basic.log.config.getRealPriority
 
-import java.io.FileDescriptor;
-
-// 2023/8/31.
 //
-public class JniTools {
-    static {
-        System.loadLibrary("tools");
+// Added by T on 2023/9/3.
+//
+
+class AndroidLogTask : Task {
+    override fun doTask(logLevel: LogLevel, tag: String?, msg: String) {
+        android.util.Log.println(logLevel.getRealPriority(), tag, msg)
     }
-
-    public native static void copyByFd(int inFd, int outFd);
-
-    public native static void copyByFileDescriptor(FileDescriptor srcFd, FileDescriptor dstFd);
-
-    public native static void copyByPath(String srcPath, String dstPath);
-
 }

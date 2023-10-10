@@ -25,7 +25,7 @@ import com.tdk.basic.log.printer.FileLogPrinter
 import com.tdk.basic.log.printer.LogcatPrinter
 import java.util.concurrent.ConcurrentHashMap
 
-object TLogRegister {
+object ConfigMap {
     private val printerConfigMap = ConcurrentHashMap<Class<out IPrinter>, IConfig>()
 
     fun registerConfig(clz: Class<out IPrinter>, config: IConfig) {
@@ -44,13 +44,21 @@ object TLogRegister {
         printerConfigMap[CrashLogPrinter::class.java] = config
     }
 
-    fun <T : IConfig> getPrinterConfig(clz: Class<out IPrinter>): T? {
+    fun <T : IConfig> getPrinterConfig(clz: Class<out IPrinter>): T {
         val iConfig = printerConfigMap[clz]
-        return iConfig as? T
+            ?: throw NotFoundException("can't find config for [${clz.name}] printer, Please registry a config for that before use")
+        return iConfig as T
     }
 
-    fun <T : IConfig> getPrinterConfig(name: String): T? {
+    fun <T : IConfig> getPrinterConfig(name: String): T {
         val iConfig = printerConfigMap.entries.find { it.key.name == name }?.value
-        return iConfig as? T
+            ?: throw NotFoundException("can't find config for [$name] printer, Please registry a config for that before use")
+        return iConfig as T
     }
+}
+
+class NotFoundException : RuntimeException {
+    constructor()
+    constructor(name: String?) : super(name)
+    constructor(name: String?, cause: Exception?) : super(name, cause)
 }

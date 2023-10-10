@@ -20,6 +20,7 @@ package com.tdk.demo.ui.sample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,7 +29,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.tdk.demo.ui.theme.DemoAndroidTheme
+import com.tdk.jni.JniTools
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 import java.util.concurrent.atomic.AtomicInteger
 
 class KoSampleActivity : ComponentActivity() {
@@ -45,7 +48,22 @@ class KoSampleActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(vm.sayHello("Android"))
+                    Greeting(vm.sayHello("Android"), modifier = Modifier.clickable {
+                        val ou = File(cacheDir, "c.png")
+                        ou.deleteOnExit()
+                        ou.createNewFile()
+                        this.assets.open("c.png").copyTo(ou.outputStream())
+//                        val inFD = this.assets.openFd("c.png").let { af->
+//
+//                            af.createInputStream().also {
+//                                it.copyTo(ou.outputStream())
+//                            }
+//                        }
+
+                        val out = File(cacheDir, "v.png")
+                        JniTools.copyByFileDescriptor(ou.inputStream().fd, out.outputStream().fd.)
+
+                    })
                 }
             }
 
