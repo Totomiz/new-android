@@ -51,4 +51,5 @@ include(":lv3_feature:business1")
 
 include(":demos:fdtest")
 include(":demos:demo_zygote")
+include(":demos:jetpack_compose")
 

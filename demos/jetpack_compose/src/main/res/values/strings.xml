@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">demo-tdk</string>
+    <string name="title_activity_host">HostActivity</string>
+</resources>
